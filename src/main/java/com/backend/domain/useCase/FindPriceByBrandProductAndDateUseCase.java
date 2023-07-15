@@ -7,13 +7,14 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.Date;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class FindPriceByBrandProductAndDateUseCase {
     private PricePort pricePort;
 
-    public Prices execute(Long brandId, Long productId, LocalDate productDate){
+    public Prices execute(Long brandId, Long productId, Date productDate){
         return pricePort.findByBrandProductAndDate(brandId,productId,productDate).stream()
                 .sorted(OrderByPriority())
                 .findFirst()

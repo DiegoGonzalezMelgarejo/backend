@@ -14,8 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "prices")
@@ -25,10 +29,12 @@ public class Prices {
     @Column(name = "price_id")
     private Long id;
     @Column(name = "start_date")
-    private LocalDate startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="brand_id", nullable = false,

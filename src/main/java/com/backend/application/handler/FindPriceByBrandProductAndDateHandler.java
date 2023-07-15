@@ -1,29 +1,32 @@
 package com.backend.application.handler;
 
+import com.backend.application.dto.PriceDto;
+import com.backend.application.mapper.PriceDtoMapper;
 import com.backend.domain.useCase.FindPriceByBrandProductAndDateUseCase;
-import com.backend.infrastructure.adapter.in.dto.GetPriceRequest;
-import com.backend.infrastructure.persistence.entity.Prices;
+import com.backend.infrastructure.adapter.in.dto.GetPriceByDateRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 
 
-import java.util.List;
+import java.util.Optional;
 
 import static com.backend.infrastructure.util.Utilities.coverterDate;
 
 @Component
 @AllArgsConstructor
 public class FindPriceByBrandProductAndDateHandler {
-    private final FindPriceByBrandProductAndDateUseCase  findPriceByBrandProductAndDateUseCase;
+    private final FindPriceByBrandProductAndDateUseCase findPriceByBrandProductAndDateUseCase;
 
-    public List<Object> execute(GetPriceRequest request) throws ParseException {
+    public PriceDto execute(GetPriceByDateRequest request) throws ParseException {
 
 
-        Prices prueba=findPriceByBrandProductAndDateUseCase.execute(request.getIdBrand(), request.getIdProduct(),
-                coverterDate(request.getDate()));
-        return null;
+        return Optional.of(findPriceByBrandProductAndDateUseCase.execute(request.getIdBrand(), request.getIdProduct(),
+                        coverterDate(request.getDate())))
+                .map(price ->
+                        PriceDtoMapper.PRICE_DOMAIN_MAPPER.converterPriceModelToPriceMapper(price, request.getDate()))
+                .get();
     }
 
 

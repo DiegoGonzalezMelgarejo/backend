@@ -1,6 +1,7 @@
 package com.backend.infrastructure.persistence.entity;
 
 import com.backend.infrastructure.util.Currency;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "prices")
+@Builder
 public class Prices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

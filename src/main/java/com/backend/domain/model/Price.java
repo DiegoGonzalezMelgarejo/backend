@@ -1,6 +1,5 @@
 package com.backend.domain.model;
 
-import com.backend.infrastructure.persistence.entity.Brand;
 import com.backend.infrastructure.util.Currency;
 import lombok.Data;
 

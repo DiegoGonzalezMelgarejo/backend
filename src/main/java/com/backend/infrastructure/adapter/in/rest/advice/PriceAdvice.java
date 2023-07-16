@@ -1,10 +1,11 @@
 package com.backend.infrastructure.adapter.in.rest.advice;
-import com.backend.application.exception.PricesException;
 import com.backend.domain.exception.PricesNotAvailableException;
 import com.backend.infrastructure.adapter.in.rest.advice.dto.MessageAdviceDto;
-import com.backend.infrastructure.util.constants.Constants;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,7 +19,8 @@ public class PriceAdvice {
 
     public PriceAdvice() {
         RESPONSE_HTTP.put(PricesNotAvailableException.class, HttpStatus.NOT_FOUND);
-        RESPONSE_HTTP.put(PricesException.class, HttpStatus.BAD_GATEWAY);
+        RESPONSE_HTTP.put(MethodArgumentNotValidException.class, HttpStatus.NOT_FOUND);
+
     }
 
     @ExceptionHandler(PricesNotAvailableException.class)
@@ -27,12 +29,21 @@ public class PriceAdvice {
         return ResponseEntity.status(RESPONSE_HTTP.get(PricesNotAvailableException.class))
                 .body(MessageAdviceDto.builder().message(exception.getMessage()).build());
     }
-
-    @ExceptionHandler(PricesException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public ResponseEntity<MessageAdviceDto> handlePricesException(PricesException exception) {
-        return ResponseEntity.status(RESPONSE_HTTP.get(PricesException.class))
-                .body(MessageAdviceDto.builder().message(exception.getMessage()).build());
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) ->{
+
+            String fieldName = ((FieldError) error).getField();
+            String message = error.getDefaultMessage();
+            errors.put(fieldName, message);
+        });
+        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
     }
+
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.backend.infrastructure.adapter.in.advice;
 
-import com.backend.application.exception.PricesException;
 import com.backend.domain.exception.PricesNotAvailableException;
 import com.backend.infrastructure.adapter.in.rest.PriceController;
 import com.backend.infrastructure.adapter.in.rest.advice.PriceAdvice;
@@ -46,20 +45,7 @@ class PriceAdviceTest {
         assertEquals("Prices not available.", response.getBody().getMessage());
     }
 
-    @Test
-    void handlePricesException_ReturnsErrorResponse() throws ParseException {
-        // Arrange
-        PricesException exception = new PricesException("Prices exception.");
 
-        when(priceController.findPriceByBrandProductAndDate(null)).thenThrow(exception);
-
-        // Act
-        ResponseEntity<MessageAdviceDto> response = priceAdvice.handlePricesException(exception);
-
-        // Assert
-        assertEquals(HttpStatus.BAD_GATEWAY, response.getStatusCode());
-        assertEquals("Prices exception.", response.getBody().getMessage());
-    }
 
 
 }

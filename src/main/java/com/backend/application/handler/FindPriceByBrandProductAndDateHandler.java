@@ -2,7 +2,7 @@ package com.backend.application.handler;
 
 import com.backend.application.dto.PriceDto;
 import com.backend.application.mapper.PriceDtoMapper;
-import com.backend.domain.useCase.FindPriceByBrandProductAndDateUseCase;
+import com.backend.domain.usecase.FindPriceByBrandProductAndDateUseCase;
 import com.backend.infrastructure.adapter.in.dto.GetPriceByDateRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

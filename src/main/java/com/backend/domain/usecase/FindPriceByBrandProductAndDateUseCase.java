@@ -1,7 +1,7 @@
-package com.backend.domain.useCase;
+package com.backend.domain.usecase;
 
 import com.backend.domain.exception.PricesNotAvailableException;
-import com.backend.domain.model.Price;
+import com.backend.domain.model.PriceDomain;
 import com.backend.domain.port.PricePort;
 import com.backend.infrastructure.persistence.mapper.PriceDomainMapper;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ public class FindPriceByBrandProductAndDateUseCase {
     private PricePort pricePort;
 
 
-    public Price execute(Long brandId, Long productId, Date productDate){
+    public PriceDomain execute(Long brandId, Long productId, Date productDate){
         return pricePort.findByBrandProductAndDate(brandId,productId,productDate).stream()
                 .findFirst()
                 .map(PriceDomainMapper.PRICE_DOMAIN_MAPPER::convertPriceEntityToPriceDomain)

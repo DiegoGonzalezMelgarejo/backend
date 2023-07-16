@@ -1,8 +1,6 @@
 package com.backend.domain.port;
 
 import com.backend.infrastructure.persistence.entity.Prices;
-
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 

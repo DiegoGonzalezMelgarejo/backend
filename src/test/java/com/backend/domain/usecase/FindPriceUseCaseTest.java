@@ -1,7 +1,7 @@
-package com.backend.domain.useCase;
+package com.backend.domain.usecase;
 
 import com.backend.domain.exception.PricesNotAvailableException;
-import com.backend.domain.model.Price;
+import com.backend.domain.model.PriceDomain;
 import com.backend.domain.port.PricePort;
 import com.backend.infrastructure.adapter.in.dto.GetPriceByDateRequest;
 import com.backend.infrastructure.persistence.entity.Prices;
@@ -29,25 +29,27 @@ import static org.mockito.Mockito.when;
 public class FindPriceUseCaseTest {
     private PricePort pricePort;
 
-    private   FindPriceByBrandProductAndDateUseCase findPriceUseCase;
+    private FindPriceByBrandProductAndDateUseCase findPriceUseCase;
 
     @BeforeEach
-    public  void initEach() {
+    public void initEach() {
         pricePort = mock(PricePort.class);
-        findPriceUseCase= new FindPriceByBrandProductAndDateUseCase (pricePort);
+        findPriceUseCase = new FindPriceByBrandProductAndDateUseCase(pricePort);
     }
+
     @Test
     public void shouldBeOk() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest1();
         List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
-                getPriceByDateRequest.getIdProduct(),getPriceByDateRequest.getIdBrand());
-        when(pricePort.findByBrandProductAndDate(any(),any(),any())).thenReturn(prices);
-        Price price=findPriceUseCase.execute(any(),any(),any());
+                getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
+        when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
+        PriceDomain price = findPriceUseCase.execute(any(), any(), any());
         Assert.assertNotNull(price);
-        Assert.assertEquals(new BigDecimal("35.50"),price.getPrice());
+        Assert.assertEquals(new BigDecimal("35.50"), price.getPrice());
     }
+
     @Test
-    public void shouldBeThrowsPricesNotAvailableException(){
+    void shouldBeThrowsPricesNotAvailableException() {
         when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(new ArrayList<>());
 
         // Act and Assert

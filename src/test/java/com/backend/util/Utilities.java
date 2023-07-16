@@ -1,6 +1,6 @@
 package com.backend.util;
 
-import com.backend.domain.model.Price;
+import com.backend.domain.model.PriceDomain;
 import com.backend.infrastructure.adapter.in.dto.GetPriceByDateRequest;
 import com.backend.infrastructure.persistence.entity.Brand;
 import com.backend.infrastructure.persistence.entity.Prices;
@@ -117,8 +117,8 @@ public class Utilities {
     private static Comparator<Prices> OrderByPriority(){
         return Comparator.comparing(Prices::getPriority).reversed();
     }
-    public static Price getPriceDomain(){
-    return new Price();
+    public static PriceDomain getPriceDomain(){
+    return new PriceDomain();
     }
 
 }

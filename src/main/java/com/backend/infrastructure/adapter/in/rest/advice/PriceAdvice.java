@@ -1,4 +1,5 @@
 package com.backend.infrastructure.adapter.in.rest.advice;
+
 import com.backend.domain.exception.PricesNotAvailableException;
 import com.backend.infrastructure.adapter.in.rest.advice.dto.MessageAdviceDto;
 
@@ -26,24 +27,22 @@ public class PriceAdvice {
     @ExceptionHandler(PricesNotAvailableException.class)
     @ResponseBody
     public ResponseEntity<MessageAdviceDto> handlePricesNotAvailableException(PricesNotAvailableException exception) {
-        return ResponseEntity.status(RESPONSE_HTTP.get(PricesNotAvailableException.class))
-                .body(MessageAdviceDto.builder().message(exception.getMessage()).build());
+        return ResponseEntity.status(RESPONSE_HTTP.get(PricesNotAvailableException.class)).body(MessageAdviceDto.builder().message(exception.getMessage()).build());
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
 
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) ->{
+        ex.getBindingResult().getAllErrors().forEach(error -> {
 
             String fieldName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
-        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
-
-
 
 
 }

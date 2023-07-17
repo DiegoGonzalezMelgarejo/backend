@@ -8,6 +8,8 @@ import com.backend.infrastructure.persistence.entity.Prices;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -17,11 +19,11 @@ import static com.backend.infrastructure.util.Currency.EUR;
 
 public class Utilities {
 
-    public static List<Prices> simulatedDatabaseQuery(Date appDate,Long productId,Long brandId) throws ParseException {
+    public static List<Prices> simulatedDatabaseQuery(LocalDateTime appDate, Long productId, Long brandId) throws ParseException {
     return  List.of(getPrice1(),getPrice2(),getPrice3(),getPrice4()).stream()
             .filter(price -> price.getProductId().equals(productId))
             .filter(price -> price.getBrand().getBrandId().equals(brandId))
-            .filter(price->appDate.after(price.getStartDate()) && appDate.before(price.getEndDate()))
+            .filter(price->appDate.isAfter(price.getStartDate()) && appDate.isBefore(price.getEndDate()))
             .sorted(OrderByPriority())
             .collect(Collectors.toList());
     }
@@ -110,9 +112,11 @@ public class Utilities {
                 .date("2020-06-16-21.00.00")
                 .build();
     }
-    public  static Date coverterDate(String date) throws ParseException {
-        SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
-        return inputFormatter.parse(date);
+    public  static LocalDateTime coverterDate(String date) throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+
+        return dateTime;
     }
     private static Comparator<Prices> OrderByPriority(){
         return Comparator.comparing(Prices::getPriority).reversed();

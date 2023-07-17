@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,11 +18,11 @@ class UtilitiesTest {
         String dateString = "2023-07-16-10.30.00";
 
         // Act
-        Date result = Utilities.coverterDate(dateString);
+        LocalDateTime result = Utilities.coverterDate(dateString);
 
         // Assert
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
-        Date expectedDate = formatter.parse(dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+        LocalDateTime expectedDate = LocalDateTime.parse(dateString, formatter);
         assertEquals(expectedDate, result);
     }
 }

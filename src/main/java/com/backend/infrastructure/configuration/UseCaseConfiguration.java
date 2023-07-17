@@ -7,8 +7,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UseCaseConfiguration {
-    @Bean
-    public FindPriceByBrandProductAndDateUseCase buildFindPriceByBrandProductAndDateUseCase(PricePort pricePort){
-        return new FindPriceByBrandProductAndDateUseCase(pricePort);
-    }
+
 }

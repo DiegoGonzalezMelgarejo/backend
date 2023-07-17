@@ -2,18 +2,18 @@ package com.backend.domain.model;
 
 import com.backend.infrastructure.util.Currency;
 import lombok.Data;
-
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 @Data
 public class PriceDomain {
 
 
     private Long id;
 
-    private Date startDate;
+    private LocalDateTime startDate;
 
-    private Date endDate;
+    private LocalDateTime endDate;
 
     private Long brandId;
 

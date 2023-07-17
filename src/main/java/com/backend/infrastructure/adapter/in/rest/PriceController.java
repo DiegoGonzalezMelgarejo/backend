@@ -23,7 +23,7 @@ public class PriceController {
     }
 
     @PostMapping(
-            path = "/",
+            path = "",
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<PriceDto> findPriceByBrandProductAndDate(@Valid @RequestBody GetPriceByDateRequest request) throws ParseException {
         return ResponseEntity.ok(findPriceByBrandProductAndDateHandler.execute(request));

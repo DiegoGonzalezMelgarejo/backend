@@ -1,12 +1,15 @@
 package com.backend.infrastructure.util;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public final  class Utilities {
-    public  static Date coverterDate(String date) throws ParseException {
-        SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss");
-        return inputFormatter.parse(date);
+
+    public  static LocalDateTime coverterDate(String date) throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+
+        return dateTime;
     }
 }

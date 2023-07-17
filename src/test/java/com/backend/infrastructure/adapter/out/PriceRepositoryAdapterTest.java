@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-public class PriceRepositoryAdapterTest {
+class PriceRepositoryAdapterTest {
     private PriceJPARepository priceJPARepository;
 
     private PriceRepositoryAdapter priceRepositoryAdapter;

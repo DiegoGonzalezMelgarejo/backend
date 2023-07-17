@@ -7,19 +7,14 @@ import com.backend.infrastructure.util.Currency;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
-
 import static com.backend.util.Utilities.getPriceByDateRequest1;
 import static com.backend.util.Utilities.getPriceDomain;
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class FindPriceByBrandProductAndDateHandlerTest {
@@ -39,8 +34,8 @@ class FindPriceByBrandProductAndDateHandlerTest {
         price.setBrandId(1l);
         price.setId(1l);
         price.setPriceList(1l);
-        price.setEndDate(new Date());
-        price.setStartDate(new Date());
+        price.setEndDate(LocalDateTime.now());
+        price.setStartDate(LocalDateTime.now());
         price.setPriority(1);
         price.setCurr(Currency.EUR);
         when(findPriceByBrandProductAndDateUseCase.execute(any(), any(), any())).thenReturn(price);

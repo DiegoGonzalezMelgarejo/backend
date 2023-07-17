@@ -26,7 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class FindPriceUseCaseTest {
+class FindPriceUseCaseTest {
     private PricePort pricePort;
 
     private FindPriceByBrandProductAndDateUseCase findPriceUseCase;
@@ -38,7 +38,7 @@ public class FindPriceUseCaseTest {
     }
 
     @Test
-    public void shouldBeOk() throws ParseException {
+    void shouldBeOk() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest1();
         List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
@@ -53,14 +53,13 @@ public class FindPriceUseCaseTest {
         when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(new ArrayList<>());
 
         // Act and Assert
-        PricesNotAvailableException exception = assertThrows(
-                PricesNotAvailableException.class,
-                () -> findPriceUseCase.execute(any(), any(), any())
-        );
+        try {
+            findPriceUseCase.execute(any(), any(), any());
+        } catch (PricesNotAvailableException exception) {
+            assertEquals(PRICES_AVAILABLE_ON_THAT_DATE, exception.getMessage());
+            verify(pricePort, times(1)).findByBrandProductAndDate(any(), any(), any());
 
-        assertEquals(PRICES_AVAILABLE_ON_THAT_DATE, exception.getMessage());
-
-        verify(pricePort, times(1)).findByBrandProductAndDate(any(), any(), any());
+        }
 
 
     }

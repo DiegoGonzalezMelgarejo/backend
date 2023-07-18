@@ -1,5 +1,6 @@
 package com.backend.util;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -12,8 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UtilitiesTest {
 
+    @SneakyThrows
     @Test
-    void coverterDate_ValidDateString_ReturnsParsedDate() throws ParseException {
+    void coverterDate_ValidDateString_ReturnsParsedDate()  {
         // Arrange
         String dateString = "2023-07-16-10.30.00";
 

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import static com.backend.util.Utilities.getPriceByDateRequest1;
 import static com.backend.util.Utilities.getPriceDomain;
 import static org.mockito.ArgumentMatchers.any;

@@ -81,35 +81,35 @@ public class Utilities {
     return GetPriceByDateRequest.builder()
             .idBrand(1l)
             .idProduct(35455l)
-            .date("2020-06-14-10.00.00")
+            .date(LocalDateTime.parse("2020-06-14-10.00.00",DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss")))
             .build();
     }
     public static GetPriceByDateRequest getPriceByDateRequest2(){
         return GetPriceByDateRequest.builder()
                 .idBrand(1l)
                 .idProduct(35455l)
-                .date("2020-06-14-16.00.00")
+                .date(LocalDateTime.parse("2020-06-14-16.00.00",DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss")))
                 .build();
     }
     public static GetPriceByDateRequest getPriceByDateRequest3(){
         return GetPriceByDateRequest.builder()
                 .idBrand(1l)
                 .idProduct(35455l)
-                .date("2020-06-14-21.00.00")
+                .date(LocalDateTime.parse("2020-06-14-21.00.00",DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss")))
                 .build();
     }
     public static GetPriceByDateRequest getPriceByDateRequest4(){
         return GetPriceByDateRequest.builder()
                 .idBrand(1l)
                 .idProduct(35455l)
-                .date("2020-06-15-10.00.00")
+                .date(LocalDateTime.parse("2020-06-15-10.00.00",DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss")))
                 .build();
     }
     public static GetPriceByDateRequest getPriceByDateRequest5(){
         return GetPriceByDateRequest.builder()
                 .idBrand(1l)
                 .idProduct(35455l)
-                .date("2020-06-16-21.00.00")
+                .date(LocalDateTime.parse("2020-06-16-21.00.00",DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss")))
                 .build();
     }
     public  static LocalDateTime coverterDate(String date) throws ParseException {

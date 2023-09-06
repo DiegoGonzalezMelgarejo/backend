@@ -40,7 +40,7 @@ class FindPriceUseCaseTest {
     @Test
     void shouldBeOk() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest1();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
+        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
         when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
         PriceDomain price = findPriceUseCase.execute(any(), any(), any());

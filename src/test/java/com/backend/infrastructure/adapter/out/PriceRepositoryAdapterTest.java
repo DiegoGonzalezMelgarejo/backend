@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
-import static com.backend.util.Utilities.coverterDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -37,7 +36,7 @@ class PriceRepositoryAdapterTest {
     @Test
     void shouldBeOkCase1() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest1();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
+        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
@@ -50,7 +49,7 @@ class PriceRepositoryAdapterTest {
     @Test
     void shouldBeOkCase2() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest2();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
+        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
@@ -63,7 +62,7 @@ class PriceRepositoryAdapterTest {
     @Test
     void shouldBeOkCase3() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest3();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
+        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
@@ -75,7 +74,7 @@ class PriceRepositoryAdapterTest {
     @Test
     void shouldBeOkCase4() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest4();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
+        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
@@ -87,9 +86,8 @@ class PriceRepositoryAdapterTest {
     @Test
     void shouldBeOkCase5() throws ParseException {
         GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest5();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(coverterDate(getPriceByDateRequest.getDate()),
+        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
-
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
         List<Prices> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
         Assert.assertEquals(2, priceList.size());

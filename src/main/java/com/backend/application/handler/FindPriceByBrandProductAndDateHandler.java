@@ -25,13 +25,13 @@ public class FindPriceByBrandProductAndDateHandler {
     }
 
 
-    public PriceDto execute(GetPriceByDateRequest request) throws ParseException {
+    public PriceDto execute(GetPriceByDateRequest request) {
 
 
         return Optional.of(findPriceByBrandProductAndDateUseCase.execute(request.getIdBrand(), request.getIdProduct(),
-                        coverterDate(request.getDate())))
+                        request.getDate()))
                 .map(price ->
-                        PriceDtoMapper.PRICE_DOMAIN_MAPPER.converterPriceModelToPriceMapper(price, request.getDate()))
+                        PriceDtoMapper.PRICE_DOMAIN_MAPPER.converterPriceModelToPriceMapper(price, request.getDate().toString()))
                 .orElseThrow();
     }
 

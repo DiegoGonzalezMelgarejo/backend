@@ -1,5 +1,6 @@
-package com.backend.domain.usecase;
+package com.backend.application.usecase;
 
+import com.backend.application.usecase.FindPriceByBrandProductAndDateUseCaseImpl;
 import com.backend.domain.exception.PricesNotAvailableException;
 import com.backend.domain.model.PriceDomain;
 import com.backend.domain.port.PricePort;
@@ -17,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.backend.infrastructure.util.constants.Constants.PRICES_AVAILABLE_ON_THAT_DATE;
-import static com.backend.util.Utilities.coverterDate;
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -29,12 +28,12 @@ import static org.mockito.Mockito.when;
 class FindPriceUseCaseTest {
     private PricePort pricePort;
 
-    private FindPriceByBrandProductAndDateUseCase findPriceUseCase;
+    private FindPriceByBrandProductAndDateUseCaseImpl findPriceUseCase;
 
     @BeforeEach
     public void initEach() {
         pricePort = mock(PricePort.class);
-        findPriceUseCase = new FindPriceByBrandProductAndDateUseCase(pricePort);
+        findPriceUseCase = new FindPriceByBrandProductAndDateUseCaseImpl(pricePort);
     }
 
     @Test

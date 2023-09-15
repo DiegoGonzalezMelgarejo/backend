@@ -1,11 +1,14 @@
 package com.backend.domain.model;
 
 import com.backend.infrastructure.util.Currency;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Builder
 public class PriceDomain {
 
 

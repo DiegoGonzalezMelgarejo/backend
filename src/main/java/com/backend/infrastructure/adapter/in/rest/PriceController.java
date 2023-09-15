@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
-import java.text.ParseException;
 
 @RestController
 @RequestMapping("/price")
@@ -25,7 +23,7 @@ public class PriceController {
     @PostMapping(
             path = "",
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<PriceDto> findPriceByBrandProductAndDate(@Valid @RequestBody GetPriceByDateRequest request) throws ParseException {
+    public ResponseEntity<PriceDto> findPriceByBrandProductAndDate(@Valid @RequestBody GetPriceByDateRequest request) {
         return ResponseEntity.ok(findPriceByBrandProductAndDateHandler.execute(request));
     }
 }

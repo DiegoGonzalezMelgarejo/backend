@@ -121,8 +121,6 @@ public class Utilities {
     private static Comparator<Prices> OrderByPriority(){
         return Comparator.comparing(Prices::getPriority).reversed();
     }
-    public static PriceDomain getPriceDomain(){
-    return new PriceDomain();
-    }
+
 
 }

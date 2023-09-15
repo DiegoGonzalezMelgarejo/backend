@@ -2,17 +2,13 @@ package com.backend.application.handler;
 
 import com.backend.application.dto.PriceDto;
 import com.backend.application.mapper.PriceDtoMapper;
-import com.backend.domain.usecase.FindPriceByBrandProductAndDateUseCase;
+import com.backend.application.usecase.FindPriceByBrandProductAndDateUseCase;
+
 import com.backend.infrastructure.adapter.in.dto.GetPriceByDateRequest;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-
 
 import java.util.Optional;
-
-
-import static com.backend.infrastructure.util.Utilities.coverterDate;
 
 @Component
 public class FindPriceByBrandProductAndDateHandler {

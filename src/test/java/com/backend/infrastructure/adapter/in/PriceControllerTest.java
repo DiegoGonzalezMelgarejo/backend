@@ -33,7 +33,7 @@ class PriceControllerTest {
         // Arrange
         GetPriceByDateRequest request = getPriceByDateRequest1();
 
-        PriceDto expectedDto = new PriceDto();
+        PriceDto expectedDto = PriceDto.builder().build();
 
         when(findPriceByBrandProductAndDateHandler.execute(any())).thenReturn(expectedDto);
 

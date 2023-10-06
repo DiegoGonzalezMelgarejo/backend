@@ -16,13 +16,10 @@ class UtilitiesTest {
     @SneakyThrows
     @Test
     void coverterDate_ValidDateString_ReturnsParsedDate()  {
-        // Arrange
+
         String dateString = "2023-07-16-10.30.00";
 
-        // Act
         LocalDateTime result = Utilities.coverterDate(dateString);
-
-        // Assert
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
         LocalDateTime expectedDate = LocalDateTime.parse(dateString, formatter);
         assertEquals(expectedDate, result);

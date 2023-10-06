@@ -12,7 +12,9 @@ public interface PriceJPARepository extends CrudRepository<Prices,Long>   {
 
 
     @Query("SELECT p FROM Prices p " +
-            "WHERE  p.brand.brandId = ?1 AND p.productId = ?2 AND (?3 BETWEEN p.startDate AND p.endDate)" +
+            "WHERE  p.brand.brandId = ?1 " +
+            "AND p.productId = ?2 " +
+            "AND (?3 BETWEEN p.startDate AND p.endDate)" +
             "ORDER BY p.priority DESC")
     List<Prices> findByBrandProductAndDate(Long brandId, Long productId, LocalDateTime appDate);
 }

@@ -122,5 +122,19 @@ public class Utilities {
         return Comparator.comparing(Prices::getPriority).reversed();
     }
 
-
+    public static GetPriceByDateRequest buildGetPriceByDateRequest(){
+        return  GetPriceByDateRequest.builder()
+                .idProduct(35455l)
+                .idBrand(1l)
+                .date(formatDate("2020-06-16-21.00.00")).build();
+    }
+    public static GetPriceByDateRequest buildGetPriceByDateNoContentRequest(){
+        return  GetPriceByDateRequest.builder()
+                .idProduct(35455l)
+                .idBrand(1l)
+                .date(LocalDateTime.now()).build();
+    }
+    private  static LocalDateTime formatDate(String date){
+        return LocalDateTime.parse(date,DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss"));
+    }
 }

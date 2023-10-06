@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -19,8 +20,9 @@ public class PriceAdvice {
     private static final Map<Class<? extends Exception>, HttpStatus> RESPONSE_HTTP = new HashMap<>();
 
     public PriceAdvice() {
-        RESPONSE_HTTP.put(PricesNotAvailableException.class, HttpStatus.NOT_FOUND);
+        RESPONSE_HTTP.put(PricesNotAvailableException.class, HttpStatus.NO_CONTENT);
         RESPONSE_HTTP.put(MethodArgumentNotValidException.class, HttpStatus.NOT_FOUND);
+        RESPONSE_HTTP.put(Exception.class, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
@@ -43,6 +45,12 @@ public class PriceAdvice {
         });
         return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
-
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<MessageAdviceDto> handleInternalServerError(Exception exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(MessageAdviceDto.builder().message("Service not available, contact administrator: " + exception.getMessage()).build());
+    }
 
 }

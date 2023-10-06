@@ -49,7 +49,7 @@ class PriceAdviceTest {
         ResponseEntity<MessageAdviceDto> response = priceAdvice.handlePricesNotAvailableException(exception);
 
         // Assert
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertEquals("Prices not available.", response.getBody().getMessage());
     }
 

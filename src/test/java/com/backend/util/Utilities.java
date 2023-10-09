@@ -7,11 +7,11 @@ import com.backend.infrastructure.persistence.entity.Prices;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,6 +83,18 @@ public class Utilities {
             .idProduct(35455l)
             .date(LocalDateTime.parse("2020-06-14-10.00.00",DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss")))
             .build();
+    }
+    public static PriceDomain buildPriceDomain() throws ParseException {
+        return PriceDomain.builder().id(1l)
+                .curr(EUR)
+                .priceList(1l)
+                .price(new BigDecimal("35.50"))
+                .priority(0)
+                .startDate(coverterDate("2020-06-14-00.00.00"))
+                .productId(35455l)
+                .endDate(coverterDate("2020-12-31-23.59.59"))
+                .brandId(1l)
+                .build();
     }
     public static GetPriceByDateRequest getPriceByDateRequest2(){
         return GetPriceByDateRequest.builder()

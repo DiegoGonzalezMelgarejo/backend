@@ -22,8 +22,6 @@ public class FindPriceByBrandProductAndDateHandler {
 
 
     public PriceDto execute(GetPriceByDateRequest request) {
-
-
         return Optional.of(findPriceByBrandProductAndDateUseCase.execute(request.getIdBrand(), request.getIdProduct(),
                         request.getDate()))
                 .map(price ->

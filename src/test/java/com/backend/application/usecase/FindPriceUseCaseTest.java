@@ -1,6 +1,5 @@
 package com.backend.application.usecase;
 
-import com.backend.application.usecase.FindPriceByBrandProductAndDateUseCaseImpl;
 import com.backend.domain.exception.PricesNotAvailableException;
 import com.backend.domain.model.PriceDomain;
 import com.backend.domain.port.PricePort;
@@ -15,9 +14,11 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.backend.infrastructure.util.constants.Constants.PRICES_AVAILABLE_ON_THAT_DATE;
+import static com.backend.util.Utilities.buildPriceDomain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -38,10 +39,7 @@ class FindPriceUseCaseTest {
 
     @Test
     void shouldBeOk() throws ParseException {
-        GetPriceByDateRequest getPriceByDateRequest = Utilities.getPriceByDateRequest1();
-        List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
-                getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
-        when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
+        when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(Collections.singletonList(buildPriceDomain()));
         PriceDomain price = findPriceUseCase.execute(any(), any(), any());
         Assert.assertNotNull(price);
         Assert.assertEquals(new BigDecimal("35.50"), price.getPrice());
@@ -51,15 +49,11 @@ class FindPriceUseCaseTest {
     void shouldBeThrowsPricesNotAvailableException() {
         when(pricePort.findByBrandProductAndDate(any(), any(), any())).thenReturn(new ArrayList<>());
 
-        // Act and Assert
         try {
             findPriceUseCase.execute(any(), any(), any());
         } catch (PricesNotAvailableException exception) {
             assertEquals(PRICES_AVAILABLE_ON_THAT_DATE, exception.getMessage());
             verify(pricePort, times(1)).findByBrandProductAndDate(any(), any(), any());
-
         }
-
-
     }
 }

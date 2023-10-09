@@ -1,5 +1,6 @@
 package com.backend.infrastructure.adapter.out;
 
+import com.backend.domain.model.PriceDomain;
 import com.backend.domain.port.PricePort;
 import com.backend.infrastructure.adapter.in.dto.GetPriceByDateRequest;
 import com.backend.infrastructure.adapter.out.PriceRepositoryAdapter;
@@ -40,7 +41,7 @@ class PriceRepositoryAdapterTest {
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
-        List<Prices> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
+        List<PriceDomain> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
         Assert.assertEquals(1, priceList.size());
         Assert.assertEquals(new BigDecimal("35.50"), priceList.get(0).getPrice());
 
@@ -53,7 +54,7 @@ class PriceRepositoryAdapterTest {
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
-        List<Prices> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
+        List<PriceDomain> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
         Assert.assertEquals(2, priceList.size());
         Assert.assertEquals(new BigDecimal("25.45"), priceList.get(0).getPrice());
 
@@ -66,7 +67,7 @@ class PriceRepositoryAdapterTest {
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
-        List<Prices> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
+        List<PriceDomain> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
         Assert.assertEquals(1, priceList.size());
         Assert.assertEquals(new BigDecimal("35.50"), priceList.get(0).getPrice());
     }
@@ -78,7 +79,7 @@ class PriceRepositoryAdapterTest {
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
 
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
-        List<Prices> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
+        List<PriceDomain> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
         Assert.assertEquals(2, priceList.size());
         Assert.assertEquals(new BigDecimal("30.50"), priceList.get(0).getPrice());
     }
@@ -89,7 +90,7 @@ class PriceRepositoryAdapterTest {
         List<Prices> prices = Utilities.simulatedDatabaseQuery(getPriceByDateRequest.getDate(),
                 getPriceByDateRequest.getIdProduct(), getPriceByDateRequest.getIdBrand());
         when(priceJPARepository.findByBrandProductAndDate(any(), any(), any())).thenReturn(prices);
-        List<Prices> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
+        List<PriceDomain> priceList = priceRepositoryAdapter.findByBrandProductAndDate(any(), any(), any());
         Assert.assertEquals(2, priceList.size());
         Assert.assertEquals(new BigDecimal("38.95"), priceList.get(0).getPrice());
     }
